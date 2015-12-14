@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+  h1= post.title
+  h3 by #{post.email}
+
+  hr
+  h3 Comment (#{post.numComment})
+  table.table
+    each comment in comments
+      tr
+        td= comment.question
+        td= comment.option1
+        td= comment.option2
+        td= comment.option3
+        td= comment.option4
+        td= comment.option5
+
+  form.form-inline(action='/posts/' + post._id + '/surveys', method='POST')
+    .form-group
+      label.sr-only(for='answer') answer
+      input.form-control(name='answer', size=50, placeholder='answer')
+    button.btn.btn-info 설문제출
+
+  hr
+  a.btn.btn-default(href='/posts') 목록
